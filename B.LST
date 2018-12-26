@@ -1,0 +1,18 @@
+     1                                  
+     2                                  
+     3                                  
+     4                                  ; a program to add three numbers using indirect addressing
+     5                                  
+     6                                  [org 0x100]
+     7 00000000 BB[1C00]                        mov bx, num1   ; point bx to first number
+     8 00000003 8B07                            mov ax, [bx]   ; load first number in ax
+     9 00000005 81C30200                        add bx, 2      ; advance bx to second number
+    10 00000009 0307                            add ax, [bx]   ; add second number to ax
+    11 0000000B 81C30200                        add bx, 2      ; advance bx to third number
+    12 0000000F 0307                            add ax, [bx]   ; add third number to ax
+    13 00000011 81C30200                        add bx, 2      ; advance bx to result
+    14 00000015 8907                            mov [bx], ax   ; store sum at num1+6
+    15 00000017 B8004C                          mov ax, 0x4c00 ; terminate program
+    16 0000001A CD21                    int 0x21
+    17                                  
+    18 0000001C 05000A000F000000        num1: dw 5, 10, 15, 0

@@ -1,0 +1,25 @@
+     1                                  
+     2                                  
+     3                                  ; a program to add ten numbers
+     4                                  
+     5                                  [org 0x0100]
+     6 00000000 BB[1D00]                	    mov bx, num1 	              ; point bx to first number
+     7 00000003 B90A00                  	    mov cx, 10                    ; load count of numbers in cx
+     8 00000006 B80000                  	    mov ax, 0                     ; initialize sum to zero
+     9                                          	                  
+    10                                  		l1:
+    11                                  
+    12 00000009 0307                    	    add ax, [bx]	              ; add number to ax
+    13 0000000B 81C30200                	    add bx, 2	                  ; advance bx to next number
+    14 0000000F 81E90100                	    sub cx, 1	                  ; numbers to be added reduced
+    15 00000013 75F4                    	    jnz l1	                      ; if numbers remain add next
+    16                                  		
+    17 00000015 A3[3100]                	    mov [total], ax	              ; write back sum in memory
+    18 00000018 B8004C                  		mov ax, 0x4c00	              ; terminate program
+    19                                  
+    20 0000001B CD21                    int 0x21	
+    21                                  
+    22 0000001D 0A0014001E00280032-     num1:	dw 10, 20, 30, 40, 50, 10, 20, 30, 40, 50
+    23 00000026 000A0014001E002800-
+    24 0000002F 3200               
+    25 00000031 0000                    total: dw 0	
